@@ -1,0 +1,41 @@
+table Medidas
+	lineageTag: 136c3898-81f3-4aeb-9d6a-065b77aa67f8
+
+	measure Receita = SUM(fVendas[Valor Total])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: c3e49624-4b94-4c9d-945e-65129c301158
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Qtd Vendida' = SUM(fVendas[Quantidade])
+		formatString: 0
+		lineageTag: 1e55687a-ab39-405a-80ce-c0c3a366331c
+
+	measure 'Ticket Médio' = DIVIDE([Receita], [Qtd Vendida])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: f8eaed29-1475-4301-9a14-5547d5fc04e3
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Coluna 1'
+		dataType: string
+		isHidden
+		lineageTag: 42f24aec-d179-4e2f-a8a5-cfee3f81e809
+		summarizeBy: none
+		sourceColumn: Coluna 1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

@@ -11,7 +11,7 @@
         {
           "location": {
             "x": 385.38305001469371,
-            "y": 2.1553020401552203
+            "y": 3.2329530602328305
           },
           "nodeIndex": "dLojas",
           "nodeLineageTag": "9838ebdd-c6f0-4112-ab80-ab39a649aa49",
@@ -24,7 +24,7 @@
         {
           "location": {
             "x": 4,
-            "y": 8.1404128197541752
+            "y": 9.2180638398317853
           },
           "nodeIndex": "dProdutos",
           "nodeLineageTag": "11384584-181b-4f6b-a8ed-c0fcbf6bf206",
@@ -37,7 +37,7 @@
         {
           "location": {
             "x": 168.20156119318534,
-            "y": 275
+            "y": 276.07765102007761
           },
           "nodeIndex": "fVendas",
           "nodeLineageTag": "fd2494d7-ed24-435e-b78c-fdec539f09f7",
@@ -46,6 +46,19 @@
             "width": 234
           },
           "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 665.38305001469371,
+            "y": 230.5
+          },
+          "nodeIndex": "Medidas",
+          "nodeLineageTag": "136c3898-81f3-4aeb-9d6a-065b77aa67f8",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas as tabelas",
