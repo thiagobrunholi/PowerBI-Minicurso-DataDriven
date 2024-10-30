@@ -47,6 +47,22 @@
           "type": "BaseTheme"
         }
       ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Background18302157731970325.png",
+          "path": "Background18302157731970325.png",
+          "type": "Image"
+        },
+        {
+          "name": "Logo_Cacau496862267748462.png",
+          "path": "Logo_Cacau496862267748462.png",
+          "type": "Image"
+        }
+      ]
     }
   ],
   "settings": {
@@ -55,5 +71,12 @@
     "allowChangeFilterTypes": true,
     "useEnhancedTooltips": true,
     "useDefaultAggregateDisplayName": true
+  },
+  "slowDataSourceSettings": {
+    "isCrossHighlightingDisabled": false,
+    "isSlicerSelectionsButtonEnabled": false,
+    "isFilterSelectionsButtonEnabled": false,
+    "isFieldWellButtonEnabled": false,
+    "isApplyAllButtonEnabled": false
   }
 }
