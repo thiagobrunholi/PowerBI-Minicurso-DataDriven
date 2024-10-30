@@ -1,0 +1,56 @@
+table dProdutos
+	lineageTag: 11384584-181b-4f6b-a8ed-c0fcbf6bf206
+
+	column 'ID Produto'
+		dataType: string
+		lineageTag: 03c5d5a9-3ece-4715-a07b-bcb456cde2ff
+		summarizeBy: none
+		sourceColumn: ID Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produto
+		dataType: string
+		lineageTag: 9948081f-fff3-4c28-a741-5ff580091d89
+		summarizeBy: none
+		sourceColumn: Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column Categoria
+		dataType: string
+		lineageTag: ee969155-ee5b-4d2a-9f0d-a7819d4e4796
+		summarizeBy: none
+		sourceColumn: Categoria
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Unitário'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: 567d8c64-3fcd-466c-b873-c7bd35fd46eb
+		summarizeBy: none
+		sourceColumn: Valor Unitário
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition dProdutos = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Funcionario\Documents\GitHub\PowerBI-Minicurso-DataDriven\Bases de Dados\Cadastro Produtos.xlsx"), null, true),
+				    CadastroProdutos_Table = Fonte{[Item="CadastroProdutos",Kind="Table"]}[Data],
+				    #"Tipo Alterado" = Table.TransformColumnTypes(CadastroProdutos_Table,{{"Produto", type text}, {"Categoria", type text}, {"Valor Unitário", type number}}),
+				    #"Dividir Coluna por Delimitador" = Table.SplitColumn(#"Tipo Alterado", "Produto", Splitter.SplitTextByDelimiter("-", QuoteStyle.Csv), {"Produto.1", "Produto.2"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Dividir Coluna por Delimitador",{{"Produto.1", type text}, {"Produto.2", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado1",{{"Produto.1", "ID Produto"}, {"Produto.2", "Produto"}}),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Colunas Renomeadas",{{"Valor Unitário", Currency.Type}})
+				in
+				    #"Tipo Alterado2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

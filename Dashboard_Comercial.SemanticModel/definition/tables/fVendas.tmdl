@@ -1,0 +1,92 @@
+table fVendas
+	lineageTag: fd2494d7-ed24-435e-b78c-fdec539f09f7
+
+	column 'ID do pedido'
+		dataType: string
+		lineageTag: 4c7070f0-15c3-4fd3-8cdd-96749785f603
+		summarizeBy: none
+		sourceColumn: ID do pedido
+
+		annotation SummarizationSetBy = Automatic
+
+	column Data
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 85c72f4c-d8c5-4eb4-88ac-d39db74c17ea
+		summarizeBy: none
+		sourceColumn: Data
+
+		variation Variation
+			isDefault
+			relationship: 9f513fc1-b221-4604-bc5e-3a6e39a52a01
+			defaultHierarchy: LocalDateTable_11bfc3ef-7073-4d6a-9a99-d6b8152408f9.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cod. Produto'
+		dataType: string
+		lineageTag: 3df46f56-db7e-4a23-a71c-a70806844678
+		summarizeBy: none
+		sourceColumn: Cod. Produto
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ID Loja'
+		dataType: string
+		lineageTag: 37ea143d-cb02-4964-adb9-ecb51a61d1b0
+		summarizeBy: none
+		sourceColumn: ID Loja
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantidade
+		dataType: int64
+		formatString: 0
+		lineageTag: 635fbdbd-51c1-4843-8a0c-b23ee77b8541
+		summarizeBy: sum
+		sourceColumn: Quantidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valor Unitário'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: eb6f2d3c-1aa8-4017-954b-a92b4915ba40
+		summarizeBy: none
+		sourceColumn: Valor Unitário
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Valor Total'
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: a6f1e9da-774d-4ad4-95fb-6df0a9facf01
+		summarizeBy: sum
+		sourceColumn: Valor Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition fVendas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(File.Contents("C:\Users\Funcionario\Documents\GitHub\PowerBI-Minicurso-DataDriven\Bases de Dados\Historico Vendas.xlsx"), null, true),
+				    Vendas_Sheet = Fonte{[Item="Vendas",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Vendas_Sheet, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"Histórico de Vendas - DataCacau", type any}, {"Column2", type any}, {"Column3", type text}, {"Column4", type text}, {"Column5", type any}, {"Column6", type any}, {"Column7", type any}}),
+				    #"Linhas Superiores Removidas" = Table.Skip(#"Tipo Alterado",1),
+				    #"Cabeçalhos Promovidos1" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos1",{{"ID do pedido", type text}, {"Data", type date}, {"Cod. Produto", type text}, {"ID Loja", type text}, {"Quantidade", Int64.Type}, {"Valor Unitário", Currency.Type}, {"Valor Total", Currency.Type}})
+				in
+				    #"Tipo Alterado1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
