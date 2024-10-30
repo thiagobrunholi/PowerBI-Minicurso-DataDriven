@@ -10,42 +10,42 @@
       "nodes": [
         {
           "location": {
-            "x": 578.38305001469371,
-            "y": 5.15530204015522
+            "x": 385.38305001469371,
+            "y": 2.1553020401552203
           },
           "nodeIndex": "dLojas",
           "nodeLineageTag": "9838ebdd-c6f0-4112-ab80-ab39a649aa49",
           "size": {
-            "height": 152,
+            "height": 180,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 3
         },
         {
           "location": {
-            "x": 10,
-            "y": 23.140412819754175
+            "x": 4,
+            "y": 8.1404128197541752
           },
           "nodeIndex": "dProdutos",
           "nodeLineageTag": "11384584-181b-4f6b-a8ed-c0fcbf6bf206",
           "size": {
-            "height": 176,
+            "height": 183,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 1
         },
         {
           "location": {
-            "x": 294.20156119318534,
-            "y": -10
+            "x": 168.20156119318534,
+            "y": 275
           },
           "nodeIndex": "fVendas",
           "nodeLineageTag": "fd2494d7-ed24-435e-b78c-fdec539f09f7",
           "size": {
-            "height": 248,
+            "height": 290,
             "width": 234
           },
-          "zIndex": 0
+          "zIndex": 2
         }
       ],
       "name": "Todas as tabelas",

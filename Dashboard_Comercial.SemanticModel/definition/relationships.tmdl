@@ -3,11 +3,11 @@ relationship 9f513fc1-b221-4604-bc5e-3a6e39a52a01
 	fromColumn: fVendas.Data
 	toColumn: LocalDateTable_11bfc3ef-7073-4d6a-9a99-d6b8152408f9.Date
 
-relationship AutoDetected_ef1eb841-fabb-462d-aa19-65a17e0c835f
+relationship 7fe89e50-cd86-977f-3b66-67086bd26e7e
+	fromColumn: fVendas.'Cod. Produto'
+	toColumn: dProdutos.'ID Produto'
+
+relationship 3dc61065-6cd4-2790-0b21-0073866deec8
 	fromColumn: fVendas.'ID Loja'
 	toColumn: dLojas.'ID Loja'
-
-relationship AutoDetected_7b8d76d9-3fd7-4b7e-ae7f-7f80e657747a
-	fromColumn: fVendas.'Valor Unitário'
-	toColumn: dProdutos.'Valor Unitário'
 

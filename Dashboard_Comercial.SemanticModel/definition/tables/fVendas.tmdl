@@ -54,7 +54,7 @@ table fVendas
 		dataType: decimal
 		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
 		lineageTag: eb6f2d3c-1aa8-4017-954b-a92b4915ba40
-		summarizeBy: none
+		summarizeBy: sum
 		sourceColumn: Valor Unitário
 
 		annotation SummarizationSetBy = Automatic
