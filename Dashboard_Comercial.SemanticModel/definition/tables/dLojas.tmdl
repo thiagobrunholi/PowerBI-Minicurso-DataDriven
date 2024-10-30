@@ -20,6 +20,7 @@ table dLojas
 	column Cidade
 		dataType: string
 		lineageTag: fae4d1d0-c6a8-4a30-9d00-c85b7fce275e
+		dataCategory: Place
 		summarizeBy: none
 		sourceColumn: Cidade
 
